@@ -1,4 +1,4 @@
-flot-philosophy-plots
+flot philosophy plots
 =====================
 
 Experimenting with [flot](http://code.google.com/p/flot/). Created a line graph to track (incredibly short) philosophy summer classes. Figured out how to 
