@@ -1,0 +1,21 @@
+html {
+	width: 100%;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 14pt;
+  margin: 50px;
+  width: 100%;
+}
+
+h1, h3 { font-weight: 300; }
+
+div#graph {
+	width: 80%;
+	height: 300px;
+}
+
+div#graph span.label {
+	
+}
