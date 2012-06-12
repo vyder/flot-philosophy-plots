@@ -41,14 +41,14 @@ $(function () {
 		"1:15pm", /* May 29 */
 		"1:10pm", /* May 30 */
 		"12:36pm", /* May 31 */
-		"12:50pm" /* June 1 */
-		/* "",  June 4 */
-		/* "",  June 5 */
-		/* "",  June 6 */
-		/* "",  June 7 */
-		/* "",  June 8 */
-		/* "",  June 11 */
-		/* "",  June 12 */
+		"12:50pm", /* June 1 */
+		"12:35pm", /* June 4 */
+		"12:39pm", /* June 5 */
+		"12:51pm", /* June 6 */
+		"12:53pm", /* June 7 */
+		"12:46pm", /* June 8 */
+		"12:50pm", /* June 11 */
+		"12:55pm" /* June 12 */
 		/* "",  June 13 */
 		/* "",  June 14 */
 		/* "",  June 15 */
@@ -56,7 +56,6 @@ $(function () {
 	
 	var i = 0;
 	var totalClassTime = 0;
-	console.log("hey");
 	for(var d = START_DATE; d <= END_DATE; d.setDate(d.getDate() + 1)) {
 		var day = d.getDay();
 		
@@ -74,7 +73,8 @@ $(function () {
 			break;
 		}
 		totalClassTime += duration;
-		$data.push([startTime.getTime(), duration]);
+		console.log(startTime + "= " + duration);
+		$data.push([endTime.getTime(), duration]);
 		i += 1;
 	}
 	var numDaysOfClass = i;
