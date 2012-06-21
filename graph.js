@@ -31,7 +31,8 @@ $(function () {
 		"12:15pm", /* June 15 */
 		"12:45pm", /* June 18 */
 		"1:05pm", /* June 19 */
-		"12:48pm" /* June 20 */
+		"12:48pm", /* June 20 */
+		"12:45pm" /* June 21 */
 	];
 	
 	var i = 0;
