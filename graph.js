@@ -35,29 +35,38 @@ $(function () {
 		"12:45pm" /* June 21 */
 	];
 	
+  // Loop through raw data and make an array of data points - (date, duration)
 	var i = 0;
 	var totalClassTime = 0;
+
 	for(var d = START_DATE; d <= END_DATE; d.setDate(d.getDate() + 1)) {
 		var day = d.getDay();
 		
+		// Skip weekends and holidays
 		if( day == SATURDAY || day == SUNDAY || ($.inArray(d.getTime(), holidays) > -1) ) {
 			continue;
 		}
 		
 		var startTime = addTimeForDate(d, startTimeString);
 		var duration = 0;
+
+		// if we have a value for endTimes[i], set duration
 		if ( i < endTimes.length ) {
-			// if we have a value for endTimes[i], set duration
 			var endTime = addTimeForDate(d, endTimes[i]);
 			duration = minutes(endTime - startTime);
 		} else {
 			break;
 		}
+		
+		// Log some data
 		totalClassTime += duration;
 		console.log(startTime + "= " + duration);
 		$data.push([endTime.getTime(), duration]);
+		
 		i += 1;
 	}
+	
+	// Calculate average
 	var numDaysOfClass = i;
 	var average_duration = totalClassTime/numDaysOfClass;
 	var avg_duration_string = "Average Duration of each class:";
@@ -81,33 +90,37 @@ $(function () {
 	
 	$("#average_duration").html(avg_duration_string);
 	console.log(average_duration);
-     
-    // $.plot(placeholder, [ options ]);
-    var plot = $.plot($("#graph"), [{
-	    	data: $data,
-	    	color: "#5AAAE5",
-	    	shadowSize:0
-    	}], {
-        line: { 
-        	show: true
-        },
-        xaxis: {
-            mode: "time",
-            max: ( END_DATE ).getTime()
-        },
-        yaxis: {
-	        min: 0,
-	        max: 90,
-	        minTickSize:1
-        },
-        grid: {
-	        hoverable: true,
-	        autoHighlight: true
-        }
-    });
+	
+  // Actual Plot   
+  // $.plot(placeholder, [ options ]);
+  var plot = $.plot($("#graph"), [{
+    	data: $data,
+    	color: "#5AAAE5",
+    	shadowSize:0
+  	}], {
+      line: { 
+      	show: true
+      },
+      xaxis: {
+          mode: "time",
+          max: ( END_DATE ).getTime()
+      },
+      yaxis: {
+        min: 0,
+        max: 90,
+        minTickSize:1
+      },
+      grid: {
+        hoverable: true,
+        autoHighlight: true
+      }
+  });
 
-	$("body").append("<span class='label'></span>");
- 
+
+
+  // Hover over data points label
+  //
+	$("body").append("<span class='label'></span>"); 
  	var latestPosition = null;
     var lastIndex = null;
     function getLabel() {
@@ -172,6 +185,7 @@ $(function () {
 			var y = point[1]; /* duration in minutes */
 			
 			var date = new Date(x);
+      // console.log(date);
 			date.setMinutes(date.getMinutes() + y);
 			
 			// Format the end time label
@@ -208,13 +222,6 @@ $(function () {
     	} else {
 	    	removeLabel();
     	}
-/*
-        if(atPoint) {
-			showLabel(atPoint.pageY, atPoint.pageX, getLabel());
-        } else {
-	        removeLabel();
-        }
-*/
     });
     
     function showLabel(x,y,labelText) {
@@ -238,6 +245,7 @@ $(function () {
     }
 });
 
+// Returns milliseconds to nearest minute
 function minutes(milliseconds) {
 	var one_millisecond = 1;
 	var one_second = 1000*one_millisecond;
@@ -246,7 +254,7 @@ function minutes(milliseconds) {
 	return Math.round(milliseconds/one_minute);
 }
 
-// timeString format: "%h:%m(am/pm)"
+// timeString format: "%h:%m(am|pm)"
 function addTimeForDate(date, timeString) {
 	if (timeString.match(/\d{1,2}\:\d{2}(am|pm)/)) {
 		var newDate = new Date(date);
