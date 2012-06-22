@@ -16,6 +16,6 @@ div#graph {
 	height: 300px;
 }
 
-div#graph span.label {
-	
+div.xAxis > div.tickLabel {
+	color:transparent;
 }
