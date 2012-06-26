@@ -34,6 +34,8 @@ $(function () {
 	endTimes["Jun 20"] = "12:48pm";
 	endTimes["Jun 21"] = "12:45pm";
 	endTimes["Jun 22"] = "12:52pm";
+	endTimes["Jun 25"] = "1:08pm";
+	endTimes["June 26"] = "12:46pm";
 	
 	// [ (date, duration), ... ]
 	$data = [];
